@@ -13,7 +13,7 @@ interface UserDao {
     suspend fun getUser(): List<User>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user:User): Long
+    suspend fun insertUser(user: User): Long
 
     @Query("SELECT COUNT(*) FROM user WHERE name = :nameUser")
     suspend fun getUserName(nameUser: String): Int
