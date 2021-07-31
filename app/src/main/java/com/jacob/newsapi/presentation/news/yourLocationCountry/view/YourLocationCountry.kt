@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.newsapi.R
 import com.jacob.newsapi.databinding.FragmentYourLocationBinding
+import com.jacob.newsapi.presentation.core.callBack.OnItemClickListener
+import com.jacob.newsapi.presentation.news.yourLocationCountry.adapters.YourCountryAdapter
+import com.jacob.newsapi.presentation.news.yourLocationCountry.model.DataYourCountry
 import com.jacob.newsapi.presentation.news.yourLocationCountry.viewModel.YourLocationViewModel
 
-class YourLocationCountry: Fragment() {
+class YourLocationCountry: Fragment(), OnItemClickListener<DataYourCountry> {
 
     private var fragmentYourLocationCountryBinding: FragmentYourLocationBinding? = null
 
@@ -45,5 +49,19 @@ class YourLocationCountry: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentYourLocationCountryBinding?.yourLocationViewModel?.countryL?.observe(
+            viewLifecycleOwner,{country ->
+                if (country.isNotEmpty()){
+                    fragmentYourLocationCountryBinding?.rvCountry?.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = YourCountryAdapter(country,this@YourLocationCountry)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun onItemClic(item: DataYourCountry, type: String?) {
+        TODO("Not yet implemented")
     }
 }
