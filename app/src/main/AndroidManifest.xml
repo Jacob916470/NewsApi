@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsApi">
+        <activity android:name=".presentation.news.NewsActivity"/>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">

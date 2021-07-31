@@ -12,7 +12,7 @@ import com.jacob.newsapi.R
 import com.jacob.newsapi.databinding.FragmentLoginBinding
 import com.jacob.newsapi.presentation.login.viewModel.LoginViewModel
 
-class LoginFragment: Fragment() {
+class LoginFragment: Fragment(), View.OnClickListener {
 
     private var fragmentLoginBinding: FragmentLoginBinding? = null
 
@@ -42,10 +42,28 @@ class LoginFragment: Fragment() {
         return fragmentLoginBinding?.root
     }
 
+    fun login(){
+        findNavController().navigate(R.id.action_loginFragment_to_newsActivity)
+    }
+
+    fun signUp(){
+        findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentLoginBinding?.btnSignUp?.setOnClickListener{
-            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        fragmentLoginBinding?.btnSignUp?.setOnClickListener(this)
+        fragmentLoginBinding?.btnLogin?.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.btnLogin ->{
+               login()
+            }
+            R.id.btnSignUp ->{
+                signUp()
+            }
         }
     }
 }
