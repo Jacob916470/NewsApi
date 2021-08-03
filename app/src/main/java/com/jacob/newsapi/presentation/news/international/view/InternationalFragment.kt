@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.newsapi.R
 import com.jacob.newsapi.databinding.FragmentInternationalBinding
+import com.jacob.newsapi.presentation.core.callBack.OnItemClickListener
+import com.jacob.newsapi.presentation.news.international.adapters.InternationalAdapter
+import com.jacob.newsapi.presentation.news.international.model.DataInternational
 import com.jacob.newsapi.presentation.news.international.viewModel.InternationalViewModel
 
-class InternationalFragment:Fragment() {
+class InternationalFragment : Fragment(), OnItemClickListener<DataInternational> {
 
     private var fragmentInternationalBinding: FragmentInternationalBinding? = null
 
@@ -42,8 +46,21 @@ class InternationalFragment:Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentInternationalBinding?.internationalViewModel?.internationalL?.observe(
+            viewLifecycleOwner, { international ->
+                if (international.isNotEmpty()) {
+                    fragmentInternationalBinding?.rvInternational?.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = InternationalAdapter(international, this@InternationalFragment)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun onItemClic(item: DataInternational, type: String?) {
+        TODO("Not yet implemented")
     }
 }

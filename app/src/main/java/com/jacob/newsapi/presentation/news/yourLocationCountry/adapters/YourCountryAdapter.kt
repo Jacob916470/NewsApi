@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextClock
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.jacob.newsapi.R
+import com.jacob.newsapi.presentation.core.callBack.OnItemClickListener
 import com.jacob.newsapi.presentation.news.yourLocationCountry.model.DataYourCountry
 import com.jacob.newsapi.presentation.news.yourLocationCountry.view.YourLocationCountry
 
 class YourCountryAdapter(
     private val yourCountryList: List<DataYourCountry>,
-    yourLocationCountry: YourLocationCountry
+    private val onItemClickListener: OnItemClickListener<DataYourCountry>,
 ) : RecyclerView.Adapter<YourCountryAdapter.YourCountryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourCountryViewHolder {
@@ -26,6 +28,9 @@ class YourCountryAdapter(
         country.img?.let { holder.image?.setImageResource(it) }
         holder.name.text = country.name
         holder.date.text = country.date
+        holder.container.setOnClickListener{
+            onItemClickListener.onItemClic(country)
+        }
     }
 
     override fun getItemCount() = yourCountryList.size
@@ -34,5 +39,6 @@ class YourCountryAdapter(
         val image = view.findViewById<AppCompatImageView>(R.id.imgYourCountry)
         val name = view.findViewById<TextView>(R.id.txtName)
         val date = view.findViewById<TextView>(R.id.txtDate)
+        val container = view.findViewById<ConstraintLayout>(R.id.container)
     }
 }
