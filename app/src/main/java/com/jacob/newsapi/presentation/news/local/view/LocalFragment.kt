@@ -62,6 +62,6 @@ class LocalFragment:Fragment(), OnItemClickListener<DataLocal> {
     }
 
     override fun onItemClic(item: DataLocal, type: String?) {
-        TODO("Not yet implemented")
+
     }
 }

@@ -62,6 +62,6 @@ class YourLocationCountry: Fragment(), OnItemClickListener<DataYourCountry> {
     }
 
     override fun onItemClic(item: DataYourCountry, type: String?) {
-        TODO("Not yet implemented")
+
     }
 }

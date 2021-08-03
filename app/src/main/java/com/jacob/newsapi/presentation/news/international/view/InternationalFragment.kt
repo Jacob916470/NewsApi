@@ -61,6 +61,6 @@ class InternationalFragment : Fragment(), OnItemClickListener<DataInternational>
     }
 
     override fun onItemClic(item: DataInternational, type: String?) {
-        TODO("Not yet implemented")
+
     }
 }
