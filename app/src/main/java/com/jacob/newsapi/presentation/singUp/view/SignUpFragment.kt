@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jacob.newsapi.R
-import com.jacob.newsapi.data.dataBase.NewsRoomDataBase
+import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
 import com.jacob.newsapi.databinding.FragmentSignUpBinding
 import com.jacob.newsapi.presentation.core.callBack.ResultCallBack
 import com.jacob.newsapi.presentation.singUp.viewModel.SignUpViewModel

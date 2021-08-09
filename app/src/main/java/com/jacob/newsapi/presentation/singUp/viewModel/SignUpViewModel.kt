@@ -1,9 +1,9 @@
 package com.jacob.newsapi.presentation.singUp.viewModel
 
 import androidx.databinding.ObservableField
-import com.jacob.newsapi.data.dataBase.NewsRoomDataBase
-import com.jacob.newsapi.data.entities.User
-import com.jacob.newsapi.data.repositories.UserRepository
+import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
+import com.jacob.newsapi.data.local.entities.User
+import com.jacob.newsapi.data.local.repositories.UserRepository
 import com.jacob.newsapi.presentation.core.base.BaseViewModel
 import com.jacob.newsapi.presentation.core.callBack.ResultCallBack
 import com.jacob.newsapi.presentation.utils.FieldValidation

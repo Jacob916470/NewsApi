@@ -1,11 +1,11 @@
-package com.jacob.newsapi.data.dataBase
+package com.jacob.newsapi.data.local.dataBase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jacob.newsapi.data.dao.UserDao
-import com.jacob.newsapi.data.entities.User
+import com.jacob.newsapi.data.local.dao.UserDao
+import com.jacob.newsapi.data.local.entities.User
 
 @Database(
     entities = [

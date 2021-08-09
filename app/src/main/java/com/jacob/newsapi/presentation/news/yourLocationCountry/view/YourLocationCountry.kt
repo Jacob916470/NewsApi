@@ -9,13 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.newsapi.R
+import com.jacob.newsapi.data.network.models.Article
+import com.jacob.newsapi.data.network.repositories.ApiNewsNetworkRepository
 import com.jacob.newsapi.databinding.FragmentYourLocationBinding
+import com.jacob.newsapi.domain.useCases.GetNewsApiUseCase
 import com.jacob.newsapi.presentation.core.callBack.OnItemClickListener
 import com.jacob.newsapi.presentation.news.yourLocationCountry.adapters.YourCountryAdapter
-import com.jacob.newsapi.presentation.news.yourLocationCountry.model.DataYourCountry
+import com.jacob.newsapi.presentation.news.yourLocationCountry.viewModel.YourCountryViewModelFactory
 import com.jacob.newsapi.presentation.news.yourLocationCountry.viewModel.YourLocationViewModel
 
-class YourLocationCountry: Fragment(), OnItemClickListener<DataYourCountry> {
+class YourLocationCountry: Fragment(), OnItemClickListener<Article> {
 
     private var fragmentYourLocationCountryBinding: FragmentYourLocationBinding? = null
 
@@ -39,7 +42,10 @@ class YourLocationCountry: Fragment(), OnItemClickListener<DataYourCountry> {
         )
         fragmentYourLocationCountryBinding?.yourLocationViewModel =
             ViewModelProvider(
-                this
+                this,
+                YourCountryViewModelFactory(
+                    GetNewsApiUseCase(ApiNewsNetworkRepository())
+                )
             ).get(YourLocationViewModel::class.java)
 
         return fragmentYourLocationCountryBinding?.root
@@ -49,19 +55,20 @@ class YourLocationCountry: Fragment(), OnItemClickListener<DataYourCountry> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentYourLocationCountryBinding?.yourLocationViewModel?.countryL?.observe(
-            viewLifecycleOwner,{country ->
-                if (country.isNotEmpty()){
+        fragmentYourLocationCountryBinding?.yourLocationViewModel?.newsApiResponseMLD?.observe(
+            viewLifecycleOwner,{newsApi ->
+                if (newsApi.articles.isNotEmpty()){
                     fragmentYourLocationCountryBinding?.rvCountry?.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = YourCountryAdapter(country,this@YourLocationCountry)
+                        adapter = YourCountryAdapter(newsApi.articles,this@YourLocationCountry)
                     }
                 }
             }
         )
     }
 
-    override fun onItemClic(item: DataYourCountry, type: String?) {
+    override fun onItemClic(item: Article, type: String?) {
 
     }
+
 }

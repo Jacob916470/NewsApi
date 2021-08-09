@@ -21,7 +21,7 @@ class NewsActivity: AppCompatActivity() {
         val viewPager = findViewById<ViewPager>(R.id.viewPager)
         val tabs = findViewById<TabLayout>(R.id.tabs)
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(YourLocationCountry(),"Your Country")
+        adapter.addFragment(YourLocationCountry(),resources.getString(R.string.your_country))
         adapter.addFragment(InternationalFragment(),"International")
         adapter.addFragment(LocalFragment(),"Local")
         viewPager.adapter = adapter
