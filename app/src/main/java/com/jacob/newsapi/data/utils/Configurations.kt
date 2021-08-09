@@ -47,7 +47,8 @@ class Configurations {
         setConfig?.baseURL?.let { baseURL = it }
     }
 
-    /**  */
+    /** Se crea función en la cual sera de tipo String e igualada a la variable "baseURL"
+     * la cual traera nuestra información */
     fun getBaseURL(): String = baseURL
 }
 

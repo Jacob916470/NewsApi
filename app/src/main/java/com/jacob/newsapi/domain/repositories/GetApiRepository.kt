@@ -4,7 +4,10 @@ import com.jacob.newsapi.data.network.models.NewsApiResponse
 import retrofit2.Response
 
 interface GetApiRepository {
-    suspend fun getNewsApiRepository(
+
+    /** Se crea suspend fun que obtendra nuestra apikey y heredara de Response y sera de tipo  "<NewsApiResponse>" */
+    suspend fun     getNewsApiRepository(
+        /** Se crea variable apikey de tipo string */
         apiKey: String
     ): Response<NewsApiResponse>
 
