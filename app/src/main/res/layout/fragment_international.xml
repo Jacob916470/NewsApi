@@ -7,7 +7,7 @@
 
         <variable
             name="internationalViewModel"
-            type="com.jacob.newsapi.presentation.news.international.viewModel.InternationalViewModel" />
+            type="com.jacob.newsapi.presentation.international.viewModel.InternationalViewModel" />
 
     </data>
 

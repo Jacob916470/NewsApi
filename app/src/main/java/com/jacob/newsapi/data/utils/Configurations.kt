@@ -23,14 +23,16 @@ class Configurations {
     /** Apuntamos nuestro String "dev" hacia nuestra "private data class configuration" la cual crearemos una variable
      * "baseURL" de tipo string la cual guardara nuestras direcciones URL*/
 
+        /** Diferentes ambientes con el cual se pueden realizar pruebas */
+
         "dev" to Configuration(
             baseURL = "https://newsapi.org/v2/"
         ),
         "qa" to Configuration(
-            baseURL = "https://api.themoviedb.org/3/"
+            baseURL = "https://newsapi.org/v2/"
         ),
         "release" to Configuration(
-            baseURL = "https://api.themoviedb.org/3/"
+            baseURL = "https://newsapi.org/v2/"
         )
     )
 
@@ -40,20 +42,18 @@ class Configurations {
 
     /** Se crea init parapoder ingresar a los datos*/
     init {
-        /** Se crea variable "setCofig" la cual sera igualada a la variable "configuration" y obtendra la variable
-         * "currentConfiguration" en la cual nos permitira ingresar a esta o estas url que obtengamos del servidor s
-         * estas no son vacias*/
+        /** Se crea variable "setCofig" para verificar que no sea nulo y le seteamos nuestra URL*/
         val setConfig = configuration[currentConfiguration]
         setConfig?.baseURL?.let { baseURL = it }
     }
 
-    /** Se crea función en la cual sera de tipo String e igualada a la variable "baseURL"
+    /** Se crea función en la cual sera de tipo String que nos retorna a la variable "baseURL"
      * la cual traera nuestra información */
     fun getBaseURL(): String = baseURL
 }
 
 /** Se crea data class la cual tendra una variable "baseURL" que sera de tipo String la cual sera la encargada
- * de almacenar nuestras URL */
+ * de almacenar nuestras URL de los diferentes ambientes */
 private data class Configuration(
     val baseURL: String = ""
 )

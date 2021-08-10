@@ -6,11 +6,24 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApiService {
+
     /** End point: es a quel que nos brinda la liga que nos provera de nuestra información
      *  que proviene de nuestro Json*/
-    @GET(value = "https://newsapi.org/v2/top-headlines?country=us")
+    @GET(value = "top-headlines?country=mx")
     suspend fun getApiNews(
-        /** Se crea "suspend fun getApiNews"  la cual generaremmos una Query que obtendra un valir string "apikey"
+
+        /** Se crea "suspend fun getApiNews"  la cual generaremmos una Query que obtendra un valor string "apikey"
+         * y extendera de Response de tipo "<NewsApiResponse>"*/
+        @Query(value = "apikey")
+
+        /** Se crea variable "apiKey" de tipo Sting*/
+        apiKey: String
+    ): Response<NewsApiResponse>
+
+    @GET("top-headlines?sources=bbc-news")
+    suspend fun getApiNewsTwo(
+
+        /** Se crea "suspend fun getApiNews"  la cual generaremmos una Query que obtendra un valor string "apikey"
          * y heredara de Response de tipo "<NewsApiResponse>"*/
         @Query(value = "apikey")
 
@@ -18,4 +31,9 @@ interface NewsApiService {
         apiKey: String
     ): Response<NewsApiResponse>
 
+    @GET("everything?q=Apple&from=2021-08-10&sortBy=popularity")
+    suspend fun getApiNewsthree(
+        @Query(value = "apikey")
+        apiKey: String
+    ):Response<NewsApiResponse>
 }

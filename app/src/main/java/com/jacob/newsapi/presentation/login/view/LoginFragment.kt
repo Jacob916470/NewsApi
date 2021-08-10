@@ -60,7 +60,7 @@ class LoginFragment: Fragment(), ResultCallBack<User> {
 
     override fun onSuccess(type: User) {
         Toast.makeText(requireContext(), "Welcome ${type.name}", Toast.LENGTH_LONG).show()
-        findNavController().navigate(R.id.action_loginFragment_to_newsActivity)
+        findNavController().navigate(R.id.action_loginFragment_to_pruebaFragment)
     }
 
     override fun onError(message: String, type: User?) {

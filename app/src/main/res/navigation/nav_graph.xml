@@ -14,8 +14,8 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_newsActivity"
-            app:destination="@id/newsActivity" />
+            android:id="@+id/action_loginFragment_to_pruebaFragment"
+            app:destination="@id/pruebaFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -27,4 +27,8 @@
         android:name="com.jacob.newsapi.presentation.news.NewsActivity"
         android:label="NewsActivity"
         tools:layout="@layout/activity_news"/>
+    <fragment
+        android:id="@+id/pruebaFragment"
+        android:name="com.jacob.newsapi.presentation.news.view.NewsFragment"
+        android:label="PruebaFragment" tools:layout="@layout/fragment_news"/>
 </navigation>
