@@ -3,24 +3,39 @@ package com.jacob.newsapi.presentation.news.international.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jacob.newsapi.R
+import com.jacob.newsapi.data.network.models.NewsApiResponse
+import com.jacob.newsapi.data.utils.Configurations
+import com.jacob.newsapi.domain.useCases.GetNewsApiUseCase
+import com.jacob.newsapi.presentation.core.base.BaseViewModel
 import com.jacob.newsapi.presentation.news.international.model.DataInternational
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class InternationalViewModel: ViewModel() {
+class InternationalViewModel(
+    private val getNewsApiUseCase: GetNewsApiUseCase
+):BaseViewModel() {
 
-    val internationalL = MutableLiveData<List<DataInternational>>()
+    var newsApiResponseMLD = MutableLiveData<NewsApiResponse>()
+    var newsApiResponse: NewsApiResponse? = null
 
     init {
         getInternationalWS()
     }
 
     fun getInternationalWS(){
-        val internationalVWM = listOf(
-            DataInternational(R.drawable.hinsense, "dsfsdf", "asfsfs"),
-            DataInternational(R.drawable.hinsense, "dsfsdf", "asfsfs"),
-            DataInternational(R.drawable.hinsense, "dsfsdf", "asfsfs"),
-            DataInternational(R.drawable.hinsense, "dsfsdf", "asfsfs"),
-            DataInternational(R.drawable.hinsense, "dsfsdf", "asfsfs"),
-        )
-        internationalL.postValue(internationalVWM)
+        job = CoroutineScope(Dispatchers.IO).launch {
+            newsApiResponse = getNewsApiUseCase.invokeTwo(
+                apiKey = Configurations.NEWS_API_KEY
+            ).body()
+            withContext(Dispatchers.Main){
+                newsApiResponse?.let {
+                    newsApiResponseMLD.postValue(
+                        it
+                    )
+                }
+            }
+        }
     }
 }

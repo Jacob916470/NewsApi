@@ -9,13 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.newsapi.R
+import com.jacob.newsapi.data.network.models.Article
+import com.jacob.newsapi.data.network.repositories.ApiNewsNetworkRepository
 import com.jacob.newsapi.databinding.FragmentInternationalBinding
+import com.jacob.newsapi.domain.useCases.GetNewsApiUseCase
 import com.jacob.newsapi.presentation.core.callBack.OnItemClickListener
 import com.jacob.newsapi.presentation.news.international.adapters.InternationalAdapter
 import com.jacob.newsapi.presentation.news.international.model.DataInternational
+import com.jacob.newsapi.presentation.news.international.viewModel.InternationalFactoryViewModel
 import com.jacob.newsapi.presentation.news.international.viewModel.InternationalViewModel
 
-class InternationalFragment : Fragment(), OnItemClickListener<DataInternational> {
+class InternationalFragment : Fragment(), OnItemClickListener<Article> {
 
     private var fragmentInternationalBinding: FragmentInternationalBinding? = null
 
@@ -39,7 +43,10 @@ class InternationalFragment : Fragment(), OnItemClickListener<DataInternational>
         )
         fragmentInternationalBinding?.internationalViewModel =
             ViewModelProvider(
-                this
+                this,
+                InternationalFactoryViewModel(
+                    GetNewsApiUseCase(ApiNewsNetworkRepository())
+                )
             ).get(InternationalViewModel::class.java)
 
         return fragmentInternationalBinding?.root
@@ -48,19 +55,19 @@ class InternationalFragment : Fragment(), OnItemClickListener<DataInternational>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentInternationalBinding?.internationalViewModel?.internationalL?.observe(
+        fragmentInternationalBinding?.internationalViewModel?.newsApiResponseMLD?.observe(
             viewLifecycleOwner, { international ->
-                if (international.isNotEmpty()) {
+                if (international.articles.isNotEmpty()) {
                     fragmentInternationalBinding?.rvInternational?.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = InternationalAdapter(international, this@InternationalFragment)
+                        adapter = InternationalAdapter(international.articles, this@InternationalFragment)
                     }
                 }
             }
         )
     }
 
-    override fun onItemClic(item: DataInternational, type: String?) {
+    override fun onItemClic(item: Article, type: String?) {
 
     }
 }

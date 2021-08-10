@@ -8,7 +8,7 @@ import com.jacob.newsapi.domain.repositories.GetApiRepository
 import retrofit2.Response
 
 /** Heredamos de "GetApiRepository" que proviene de nuestro repository que se encuentra en nuestra package domain */
-class ApiNewsNetworkRepository():GetApiRepository {
+class ApiNewsNetworkRepository():GetApiRepository{
 
     /** creamos variable privada "retrofitInstance" que sera igualada a nuestra clase "NetworkModule" la cual
      * nos permitira acceder a nuestra función "provideRetofit" la cual mandaremos a traer a su costructor la variable
@@ -35,6 +35,18 @@ class ApiNewsNetworkRepository():GetApiRepository {
          * y la igualaremos a "apiKey" que proviene de nuestra "suspend fun getNewsApiRepository"
          * la cual sobre escribimos */
         ).getApiNews(
+            apiKey = apiKey
+        )
+    }
+
+    override suspend fun getNewsApiRepositoryTwo(
+        apiKey: String
+    ): Response<NewsApiResponse> {
+        return NetworkModule().provideApi(
+            retrofit = retrofitInstance,
+            service = NewsApiService::class.java
+
+        ).getApiNewsTwo(
             apiKey = apiKey
         )
     }
