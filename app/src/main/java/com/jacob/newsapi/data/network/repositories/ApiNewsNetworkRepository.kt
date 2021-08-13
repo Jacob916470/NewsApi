@@ -7,7 +7,7 @@ import com.jacob.newsapi.data.utils.Configurations
 import com.jacob.newsapi.domain.repositories.GetApiRepository
 import retrofit2.Response
 
-/** Extendemos de "GetApiRepository" que proviene de nuestro repository que se encuentra en nuestra package domain */
+/** Heredamos de "GetApiRepository" que proviene de nuestro repository que se encuentra en nuestra package domain */
 class ApiNewsNetworkRepository():GetApiRepository {
 
     /** creamos variable privada "retrofitInstance" que sera igualada a nuestra clase "NetworkModule" la cual
@@ -18,7 +18,7 @@ class ApiNewsNetworkRepository():GetApiRepository {
         NetworkModule().provideRetofit(baseURL = Configurations().getBaseURL())
 
     /** Sobre escribimos nuestra función "getNewsApiRepository" que proviene de nuestra interface "GetApiRepository",
-     * también retornamos a la función de Response de tipo "<NewsApiResponse>"*/
+     * también heredaremos a la función de Response de tipo "<NewsApiResponse>"*/
     override suspend fun getNewsApiRepository(
         /** Se crea variable "apiKey" de tipo String */
         apiKey: String
@@ -30,34 +30,11 @@ class ApiNewsNetworkRepository():GetApiRepository {
         return NetworkModule().provideApi(
             retrofit = retrofitInstance,
             service = NewsApiService::class.java
-            /** Accederemos a nuestra función "getApiNews" que proviene de nuestra interface "NewsApiService" y en
-             * su constructor mandaremos a llamar a nuestra variable "apiKey" que proviene de la misma interface
-             * y la igualaremos a "apiKey" que proviene de nuestra "suspend fun getNewsApiRepository"
-             * la cual sobre escribimos */
+        /** Accederemos a nuestra función "getApiNews" que proviene de nuestra interface "NewsApiService" y en
+         * su constructor mandaremos a llamar a nuestra variable "apiKey" que proviene de la misma interface
+         * y la igualaremos a "apiKey" que proviene de nuestra "suspend fun getNewsApiRepository"
+         * la cual sobre escribimos */
         ).getApiNews(
-            apiKey = apiKey
-        )
-    }
-
-    override suspend fun getNewsApiRepositoryTwo(
-        apiKey: String
-    ): Response<NewsApiResponse> {
-        return NetworkModule().provideApi(
-            retrofit = retrofitInstance,
-            service = NewsApiService::class.java
-
-        ).getApiNewsTwo(
-            apiKey = apiKey
-        )
-    }
-
-    override suspend fun getNewsApiRepositoryThree(
-        apiKey: String
-    ): Response<NewsApiResponse> {
-        return NetworkModule().provideApi(
-            retrofit = retrofitInstance,
-            service = NewsApiService::class.java
-        ).getApiNewsthree(
             apiKey = apiKey
         )
     }
