@@ -1,11 +1,16 @@
 package com.jacob.newsapi.presentation.login.viewModel
 
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.ObservableField
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
 import com.jacob.newsapi.data.local.entities.User
 import com.jacob.newsapi.data.local.repositories.UserRepository
 import com.jacob.newsapi.presentation.core.base.BaseViewModel
 import com.jacob.newsapi.presentation.core.callBack.ResultCallBack
+import com.jacob.newsapi.presentation.login.view.LoginFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

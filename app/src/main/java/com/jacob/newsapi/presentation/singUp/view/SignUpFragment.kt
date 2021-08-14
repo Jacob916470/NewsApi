@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.jacob.newsapi.R
 import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
 import com.jacob.newsapi.databinding.FragmentSignUpBinding
@@ -19,6 +20,7 @@ import com.jacob.newsapi.presentation.singUp.viewModel.SignUpViewModelFactory
 class SignUpFragment : Fragment(), View.OnClickListener, ResultCallBack<String> {
 
     private var fragmentSignUpBinding: FragmentSignUpBinding? = null
+    private val ref: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

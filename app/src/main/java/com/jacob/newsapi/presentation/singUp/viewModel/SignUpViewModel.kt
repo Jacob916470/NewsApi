@@ -1,6 +1,7 @@
 package com.jacob.newsapi.presentation.singUp.viewModel
 
 import androidx.databinding.ObservableField
+import com.google.firebase.auth.FirebaseAuth
 import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
 import com.jacob.newsapi.data.local.entities.User
 import com.jacob.newsapi.data.local.repositories.UserRepository
@@ -24,8 +25,7 @@ class SignUpViewModel(
     val txtPassword = ObservableField("")
 
     private fun inserUser() {
-        job = CoroutineScope(Dispatchers.IO).launch {
-
+       job = CoroutineScope(Dispatchers.IO).launch {
             val rows = userRepository.insertUser(
                 user = User(
                     name = txtName.get().toString(),

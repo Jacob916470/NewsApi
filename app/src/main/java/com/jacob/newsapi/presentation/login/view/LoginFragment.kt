@@ -1,6 +1,8 @@
 package com.jacob.newsapi.presentation.login.view
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.jacob.newsapi.R
 import com.jacob.newsapi.data.local.dataBase.NewsRoomDataBase
 import com.jacob.newsapi.data.local.entities.User
@@ -20,6 +26,7 @@ import com.jacob.newsapi.presentation.login.viewModel.LoginViewModelFactory
 class LoginFragment: Fragment(), ResultCallBack<User> {
 
     private var fragmentLoginBinding: FragmentLoginBinding? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +57,6 @@ class LoginFragment: Fragment(), ResultCallBack<User> {
 
         return fragmentLoginBinding?.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoginBinding?.btnSignUp?.setOnClickListener{

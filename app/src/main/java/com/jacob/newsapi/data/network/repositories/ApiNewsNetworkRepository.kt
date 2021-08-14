@@ -38,5 +38,26 @@ class ApiNewsNetworkRepository():GetApiRepository {
             apiKey = apiKey
         )
     }
+    override suspend fun getNewsApiRepositoryTwo(
+        apiKey: String
+    ): Response<NewsApiResponse> {
+        return NetworkModule().provideApi(
+            retrofit = retrofitInstance,
+            service = NewsApiService::class.java
+
+        ).getApiNewsTwo(
+            apiKey = apiKey
+        )
+    }
+    override suspend fun getNewsApiRepositoryThree(
+        apiKey: String
+    ): Response<NewsApiResponse> {
+        return NetworkModule().provideApi(
+            retrofit = retrofitInstance,
+            service = NewsApiService::class.java
+        ).getApiNewsthree(
+            apiKey = apiKey
+        )
+    }
 
 }
